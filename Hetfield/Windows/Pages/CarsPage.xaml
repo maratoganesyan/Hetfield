@@ -1,0 +1,237 @@
+﻿<Page x:Class="Hetfield.Windows.Pages.CarsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hetfield.Windows.Pages"
+      mc:Ignorable="d"
+      Title="CarsPage"
+      x:Name="CarPage"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:modern="http://schemas.modernwpf.com/2019"
+      d:DesignHeight="450"
+      Background="Transparent"
+      d:DesignWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="7*" />
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="White"
+                BorderThickness="1"
+                Grid.RowSpan="2"
+                CornerRadius="10"/>
+
+        <modern:SimpleStackPanel HorizontalAlignment="Left"
+                                 Margin="15 0 0 0"
+                                 Orientation="Horizontal"
+                                 Spacing="10"
+                                 VerticalAlignment="Center">
+            <modern:AutoSuggestBox x:Name="SearchTextBox"
+                                   FontSize="18"
+                                   Width="200"
+                                   VerticalAlignment="Center"
+                                   TextChanged="SearchTextBox_TextChanged"
+                                   VerticalContentAlignment="Center"
+                                   modern:ControlHelper.PlaceholderText="Поиск"
+                                   QueryIcon="Find" >
+            </modern:AutoSuggestBox>
+        </modern:SimpleStackPanel>
+
+        <modern:SimpleStackPanel HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Orientation="Horizontal"
+                                 Spacing="10">
+            <ui:Button Icon="ArrowCircleLeft24"
+                       x:Name="LeftCarsButton"
+                       Click="LeftCarsButton_Click"
+                       Margin="150 0 0 0"
+                       FontSize="35"/>
+
+            <ui:Button Icon="ArrowCircleRight24"
+                       x:Name="RightCarsButton"
+                       Click="RightCarsButton_Click"
+                       Margin="0 0 100 0"
+                       FontSize="35"/>
+
+            <ui:ToggleSwitch x:Name="EnableCarStatusToogleSwitch"
+                             Background="#FF02A702"
+                             Unchecked="EnableCarStatusToogleSwitch_Unchecked"
+                             Checked="EnableCarStatusToogleSwitch_Unchecked"/>
+            <ComboBox x:Name="CarStatusComboBox"
+                      Foreground="White"
+                      BorderBrush="White"
+                      Width="200"
+                      VerticalAlignment="Center"
+                      SelectionChanged="CarStatusComboBox_SelectionChanged"
+                      FontSize="17"
+                      BorderThickness="0 0 0 1"
+                      HorizontalAlignment="Stretch">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Foreground="White">
+                            <Run Text="{Binding CarStatusName}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+        </modern:SimpleStackPanel>
+
+        <modern:SimpleStackPanel HorizontalAlignment="Right"
+                                 VerticalAlignment="Center"
+                                 Margin="0 0 15 0">
+
+            <ui:Button Icon="Add16"
+                       Content="Добавить"
+                       FontSize="18"
+                       x:Name="Add"
+                       BorderBrush="White"
+                       BorderThickness="1" 
+                       Click="Add_Click"/>
+        </modern:SimpleStackPanel>
+
+        <Grid Grid.Row="1"
+              x:Name="CarsPanel"
+              Margin="3 0"
+              Visibility="Visible">
+            <ScrollViewer x:Name="ScrollView"
+                        Background="Transparent">
+                <ItemsControl x:Name="OutputPruduct">
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1"
+                                    BorderBrush="White"
+                                    CornerRadius="20"
+                                    Margin="10">
+                                <Border.Background>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="#E667AF"
+                                                      Offset="1" />
+                                        <GradientStop Color="#876ED7"
+                                                      Offset="0.40" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <modern:SimpleStackPanel Orientation="Vertical"
+                                                     Margin="0 10 0 0"
+                                                     Background="Transparent">
+                                    <ScrollViewer Height="350"
+                                                  x:Name="PhotoViewer">
+                                        <ItemsControl x:Name="PhotoControl"
+                                                      ItemsSource="{Binding CarPhotos}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    
+                                                    <Border BorderThickness="2"
+                                                            BorderBrush="Black"
+                                                            Margin="10">
+                                                        <Image Source="{Binding Photo}"
+                                                               MaxHeight="{Binding ElementName=PhotoViewer, Path=ActualHeight}"/>
+                                                        
+                                                    </Border>
+                                                </DataTemplate >
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                    <TextBlock TextWrapping="Wrap"
+                                               HorizontalAlignment="Center"
+                                               FontSize="20"
+                                               Margin="0 15 0 10">
+                                            <Run Text="Mercedez-Benz"/>
+                                            <Run Text="{Binding IdCarPassportNavigation.CarModel}"/>
+                                    </TextBlock>
+
+                                    <TextBlock TextWrapping="Wrap"
+                                               HorizontalAlignment="Left"
+                                               Margin="20 5 0 5"
+                                               FontSize="20">
+                                            <Run Text="Vin:"/>
+                                            <Run Text="{Binding IdCarPassportNavigation.VinNumber}"/>
+                                    </TextBlock>
+
+                                    <TextBlock TextWrapping="Wrap"
+                                               HorizontalAlignment="Left"
+                                               Margin="20 5 0 5"
+                                               FontSize="20">
+                                            <Run Text="Статус:" />
+                                            <Run Text="{Binding IdCarStatusNavigation.CarStatusName}"/>
+                                    </TextBlock>
+
+                                    <TextBlock TextWrapping="Wrap"
+                                               HorizontalAlignment="Left"
+                                               FontSize="20"
+                                               Margin="20 5 0 10">
+                                            <Run Text="Владелец:"/>
+                                            <Run Text="{Binding IdCarPassportNavigation.IdOwnerNavigation.Surname}"/>
+                                            <Run Text="{Binding IdCarPassportNavigation.IdOwnerNavigation.Name}"/>
+                                            <Run Text="{Binding IdCarPassportNavigation.IdOwnerNavigation.Patronymic}"/>
+                                    </TextBlock>
+
+                                    <TextBlock TextWrapping="Wrap"
+                                               HorizontalAlignment="Left"
+                                               Margin="20 5 0 20"
+                                               FontSize="20">
+                                            <Run Text="Цена:" />
+                                            <Run Text="{Binding Price, StringFormat={}{0:0.00} ₽}"/>
+                                    </TextBlock>
+
+                                    <modern:SimpleStackPanel Orientation="Horizontal"
+                                                             HorizontalAlignment="Center"
+                                                             Spacing="10"
+                                                             Margin="10 0 10 20"
+                                                             VerticalAlignment="Bottom">
+                                        <Button x:Name="GetCarPassport"
+                                                Content="ПТС"
+                                                Background="Transparent"
+                                                BorderBrush="Black"
+                                                   FontSize="16"
+                                                Foreground="Black"
+                                                modern:ControlHelper.CornerRadius="10"
+                                                HorizontalAlignment="Left"
+                                                BorderThickness="1" 
+                                                Click="GetCarPassport_Click"/>
+
+                                        <Button x:Name="AboutCar"
+                                                Content="Подробная информация"
+                                                Background="Transparent"
+                                                BorderBrush="Black"
+                                                Foreground="Black"
+                                                   FontSize="16"
+                                                Click="AboutCar_Click"
+                                                modern:ControlHelper.CornerRadius="10"
+                                                BorderThickness="1"
+                                                HorizontalAlignment="Center" />
+
+                                        <Button x:Name="ChangeCar"
+                                                Content="Изменить"
+                                                BorderBrush="Black"
+                                                Foreground="Black"
+                                                   FontSize="16"
+                                                Click="ChangeCar_Click"
+                                                modern:ControlHelper.CornerRadius="10"
+                                                BorderThickness="1"
+                                                Background="Transparent"
+                                                HorizontalAlignment="Right"/>
+                                    </modern:SimpleStackPanel>
+                                    
+                                </modern:SimpleStackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+
+
+
+    </Grid>
+</Page>

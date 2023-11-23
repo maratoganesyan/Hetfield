@@ -1,0 +1,158 @@
+﻿<Window x:Class="Hetfield.Windows.CarPassportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hetfield.Windows"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:modern="http://schemas.modernwpf.com/2019"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.png"
+        Height="480"
+        Width="400">
+    <Window.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#b672db"
+                          Offset="1" />
+            <GradientStop Color="#69089e"
+                          Offset="0.2" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+
+
+        <StackPanel HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <Image Source="/Resources/Logo.png"
+                   Width="120"/>
+        </StackPanel>
+        
+        <StackPanel HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top">
+            <ui:Button Icon="Circle12"
+                       IconForeground="Green"
+                       Padding="0"
+                       FontSize="20"
+                       IconFilled="True"
+                       x:Name="Minim"
+                       Click="Minim_Click"
+                       BorderBrush="Transparent"
+                       Background="Transparent">
+            </ui:Button>
+            <ui:Button Icon="Circle12"
+                       IconForeground="Red"
+                       Padding="0"
+                       x:Name="CloseButton"
+                       Click="CloseButton_Click"
+                       FontSize="20"
+                       IconFilled="True"
+                       BorderBrush="Transparent"
+                       Background="Transparent" />
+        </StackPanel>
+        <StackPanel
+                Margin="10, 100, 30, 20">
+            <modern:SimpleStackPanel HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     Margin="10"
+                                     Spacing="15">
+                <TextBlock FontSize="17" 
+                           TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold"  
+                         Text="1. Модель: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline"  
+                         Text="{Binding CarModel}"/>
+                </TextBlock>
+                
+                <TextBlock FontSize="17" 
+                           TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="2. Тип ТС: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding IdCarTypeNavigation.TypeName}"/>
+                </TextBlock>
+                
+                <TextBlock 
+                    FontSize="17"
+                    TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="3. Владелец: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding IdOwnerNavigation.Surname}"/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding IdOwnerNavigation.Name}"/>
+                </TextBlock>
+                
+                <TextBlock FontSize="17" TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="4. Цвет: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding IdCarColorNavigation.ColorName}"/>
+                </TextBlock>
+                
+                <TextBlock FontSize="17" 
+                           TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="5. Год Изготовления ТС: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding CarManufactureYear}"/>
+                </TextBlock>
+                
+                <TextBlock FontSize="17" 
+                           TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="6. Vin: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding VinNumber}"/>
+                </TextBlock>
+
+                <TextBlock FontSize="17" 
+                           TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="7. Объем двигателя: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding EngineDisplacement}"/>
+                </TextBlock>
+
+                <TextBlock FontSize="17" 
+                           TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="8. Серия и номер ПТС: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding PassportSeriasAndNumber}"/>
+                </TextBlock>
+
+                <TextBlock FontSize="17" 
+                           TextWrapping="Wrap">
+                    <Run Foreground="White" 
+                         FontWeight="Bold" 
+                         Text="9.Дата выдачи ПТС: "/>
+                    <Run Foreground="White" 
+                         TextDecorations="Underline" 
+                         Text="{Binding DateOfIssue, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                </TextBlock>
+
+            </modern:SimpleStackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

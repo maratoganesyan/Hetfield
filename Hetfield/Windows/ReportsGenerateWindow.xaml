@@ -1,0 +1,164 @@
+﻿<Window x:Class="Hetfield.Windows.ReportsGenerateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hetfield.Windows"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:modern="http://schemas.modernwpf.com/2019"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.png"
+        Height="300"
+        Width="400">
+    <Window.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#69089e"
+                          Offset="1"
+                          />
+            <GradientStop Color="#b672db"
+                          Offset="0.4" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top">
+            <ui:Button Icon="Circle12"
+                       IconForeground="Red"
+                       Padding="0"
+                       x:Name="CloseButton"
+                       Click="CloseButton_Click"
+                       FontSize="20"
+                       IconFilled="True"
+                       BorderBrush="Transparent"
+                       Background="Transparent" />
+        </StackPanel>
+
+        <Menu VerticalAlignment="Top"
+              HorizontalAlignment="Left">
+            <MenuItem Header="По продажам"
+                      Foreground="White"
+                      x:Name="OrdersMI"
+                      Click="OrdersMI_Click"
+                      FontSize="17"/>
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+            <MenuItem Header="По сотрудникам"
+                      Foreground="White"
+                      x:Name="StaffMI"
+                      Click="StaffMI_Click"
+                      FontSize="17"/>
+            <Separator Width="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+        </Menu>
+
+
+        <Border BorderBrush="White"
+                BorderThickness="1"
+                CornerRadius="20"
+                Grid.Row="1"
+                Margin="5 0 5 5">
+            <Grid x:Name="SalesReport">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <ui:TextBox
+                        x:Name="UIDesignHelp"
+                        SelectionBrush="#b672db"
+                        Visibility="Collapsed"/>
+
+                    <modern:SimpleStackPanel HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Orientation="Horizontal"
+                                             Spacing="30">
+                        <DatePicker x:Name="StartDatePicker"
+                            FontSize="16"
+                            BorderBrush="White"
+                            Foreground="White"
+                            BorderThickness="0.5 0.5 0.5 1"
+                            Background="{Binding ElementName=UIDesignHelp, Path=Background}">
+                            <modern:ControlHelper.Header>
+                                <TextBlock Foreground="White" FontSize="16" Text="От:"/>
+                            </modern:ControlHelper.Header>
+                        </DatePicker>
+
+                        <DatePicker x:Name="EndDatePicker"
+                            FontSize="16"
+                            BorderBrush="White"
+                            Foreground="White"
+                            BorderThickness="0.5 0.5 0.5 1"
+                            Background="{Binding ElementName=EmailTextBox, Path=Background}"
+                            Width="{Binding ElementName=EmailTextBox, Path=ActualWidth}">
+                            <modern:ControlHelper.Header>
+                                <TextBlock Foreground="White" FontSize="16" Text="До:"/>
+                            </modern:ControlHelper.Header>
+                        </DatePicker>
+                    </modern:SimpleStackPanel>
+
+                    <Grid Grid.Row="1">
+                        <modern:SimpleStackPanel HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Spacing="20"
+                                                 x:Name="SaveButtonPanel">
+
+                            <ComboBox x:Name="StaffComboBox"
+                                              Foreground="White"
+                                              FontSize="17"
+                                              BorderBrush="White"
+                                      Visibility="Visible"
+                                              BorderThickness="0 0 0 1"
+                                              Width="200"
+                                              HorizontalAlignment="Stretch"
+                                              Background="{Binding ElementName=UIDesignHelp, Path=Background}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="White">
+                                                 <Run Text="{Binding Surname}" />
+                                                 <Run Text="{Binding Name}" />
+                                                 <Run Text="{Binding Patronymic}" />
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+
+
+                            <ui:Button Content="Сгенерировать"
+                                       HorizontalAlignment="Center"
+                                       x:Name="GenerateReprotButton"
+                                       Click="GenerateReprotButton_Click"
+                                       BorderBrush="White"
+                                       BorderThickness="0.5"
+                                       FontSize="20"
+                                       Width="200"/>
+
+                        </modern:SimpleStackPanel>
+
+                        <Grid Grid.Row="1">
+                            <ui:ProgressRing Foreground="White"
+                                             x:Name="LoadProgressRing"
+                                             HorizontalAlignment="Left"
+                                             Margin="20 0 0 0"
+                                             Visibility="Hidden"
+                                            IsIndeterminate="True"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>

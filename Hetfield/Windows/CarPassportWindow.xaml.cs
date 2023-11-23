@@ -1,0 +1,39 @@
+﻿using Hetfield.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Hetfield.Windows
+{
+    /// <summary>
+    /// Interaction logic for CarPassportWindow.xaml
+    /// </summary>
+    public partial class CarPassportWindow : Window
+    {
+        public CarPassportWindow(CarsPassport passport)
+        {
+            InitializeComponent();
+            DataContext = passport;
+        }
+
+        private void Minim_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+    }
+}

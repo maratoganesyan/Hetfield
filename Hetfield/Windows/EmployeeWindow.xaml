@@ -1,0 +1,306 @@
+﻿<Window x:Class="Hetfield.Windows.EmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hetfield.Windows"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:modern="http://schemas.modernwpf.com/2019"
+        WindowStyle="None"
+        Mouse.MouseDown="Window_MouseDown"
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        Title="EmployeeWindow"
+        x:Name="ThisWindow"
+        Icon="/Resources/Logo.png"
+        FontSize="25"
+        Height="850"
+        Width="1400">
+    <Window.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#b672db"
+                          Offset="0.8" />
+            <GradientStop Color="#69089e"
+                          Offset="0" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid x:Name="MainGrid">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+
+            <Border CornerRadius="10"
+                    Background="Transparent"
+                    BorderThickness="1"
+                    BorderBrush="White"
+                    Margin="5"
+                    x:Name="LogoBorder">
+                <Image Source="/Resources/Logo.png" />
+            </Border>
+
+            <Border x:Name="MainMenuBorder"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    CornerRadius="10"
+                    Grid.Row="1"
+                    Margin="5">
+
+
+
+                <Menu Background="Transparent"
+                      x:Name="MainMenu"
+                      Grid.Row="1"
+                      VerticalAlignment="Top"
+                      Width="{Binding ElementName=MainMenuBorder, Path=ActualWidth}"
+                      Height="{Binding ElementName=MainMenuBorder, Path=ActualHeight}">
+                    <ui:MenuItem SymbolIcon="BookOpen16"
+                                 Foreground="White"
+                                 Header="Справочники"
+                                 x:Name="Spr"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 ContextMenuService.HasDropShadow="True"
+                                 SymbolIconFilled="True"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}">
+                        <ui:MenuItem.Items>
+                            <ui:MenuItem Header="Роль"
+                                         Tag="/Windows/Pages/RolesPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Пол"
+                                         Tag="/Windows/Pages/GendersPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Статусы заказов"
+                                         Tag="/Windows/Pages/OrderStatusesPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Типы автомобилей"
+                                         Tag="/Windows/Pages/CarTypesPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Цвета автомобилей"
+                                         Tag="/Windows/Pages/CarColorsPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Года"
+                                         Tag="/Windows/Pages/ManufactureYearsPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Коробки передач"
+                                         Tag="/Windows/Pages/CarTranssmissionsPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Двигатели"
+                                         Tag="/Windows/Pages/CarEnginesPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Статусы автомобилей"
+                                         Tag="/Windows/Pages/CarStatusesPage.xaml"
+                                         Click="MI_Click"/>
+                            <ui:MenuItem Header="Комплектации автомобилей"
+                                         Tag="/Windows/Pages/CarConfigurationsPage.xaml"
+                                         Click="MI_Click"/>
+
+                        </ui:MenuItem.Items>
+                    </ui:MenuItem>
+                    <ui:MenuItem SymbolIcon="VehicleCar16"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 x:Name="CarsMI"
+                                 Click="MI_Click"
+                                 Tag="/Windows/Pages/CarsPage.xaml"
+                                 SymbolIconFilled="True"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Автомобили" />
+
+                    <ui:MenuItem SymbolIcon="Person16"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 x:Name="UsersMI"
+                                 Tag="/Windows/Pages/UsersTable.xaml"
+                                 Click="MI_Click"
+                                 SymbolIconFilled="True"
+                                 Command="{Binding UsersClick}"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Пользователи" />
+                    <ui:MenuItem SymbolIcon="Cart16"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 x:Name="OrdersMI"
+                                 Tag="/Windows/Pages/OrdersPage.xaml"
+                                 Click="MI_Click"
+                                 SymbolIconFilled="True"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Сделки" RenderTransformOrigin="0.837,0.254" />
+                    <ui:MenuItem SymbolIcon="Person16"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 x:Name="ClientsMI"
+                                 Tag="/Windows/Pages/ClientsTable.xaml"
+                                 Click="MI_Click"
+                                 SymbolIconFilled="True"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Клиенты" />
+                    <ui:MenuItem SymbolIcon="ChartMultiple20"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 x:Name="ChartMI"
+                                 Tag="/Windows/Pages/ChartsPage.xaml"
+                                 Click="MI_Click"
+                                 SymbolIconFilled="True"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Статистика" />
+                    <ui:MenuItem SymbolIcon="Document16"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 x:Name="DocumentsMI"
+                                 Click="DocumentsMI_Click"
+                                 SymbolIconFilled="True"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Документы" />
+                </Menu>
+
+            </Border>
+
+            <Border Grid.Row="2"
+                    x:Name="ButtomMenuBorder"
+                    BorderBrush="White"
+                    BorderThickness="1"
+                    Margin="5"
+                    CornerRadius="10">
+                <Menu Height="{Binding ElementName=ButtomMenuBorder, Path=ActualHeight}"
+                      Margin="0 5 0 0">
+                    <ui:MenuItem SymbolIcon="Settings16"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 x:Name="Settings"
+                                 Click="Settings_Click"
+                                 SymbolIconFilled="True"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Настройки" />
+                    <ui:MenuItem SymbolIcon="DoorArrowLeft16"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                 Foreground="White"
+                                 SymbolIconFilled="False"
+                                 x:Name="Exit"
+                                 Click="Exit_Click"
+                                 Width="{Binding ElementName=MainMenu, Path=ActualWidth}"
+                                 Header="Выйти" />
+                </Menu>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="7*" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="EmplyeeInformationGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="{Binding ElementName=TitleBarPanel, Path=ActualWidth}" />
+                </Grid.ColumnDefinitions>
+
+
+                <Border BorderBrush="White"
+                        BorderThickness="1"
+                        Margin="5" 
+                        CornerRadius="10"/>
+
+                <StackPanel HorizontalAlignment="Left"
+                            Margin="20 0 0 0"
+                            VerticalAlignment="Center">
+                    <ui:ProgressRing Foreground="White"
+                                     IsIndeterminate="True"
+                                     x:Name="LoadRing"
+                                     Visibility="Hidden"/>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            Margin="0 0 10 0"
+                            x:Name="EmployeeDataPanel">
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0 0 10 0">
+                        <TextBlock Foreground="White"
+                                   FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                                   TextAlignment="Center"
+                                   x:Name="EmployeeInformation"
+                                   Height="36">
+                        <Run Text="{Binding Surname}" />
+                        <Run Text="{Binding Name}" />
+                        <Run Text="(" />
+                        <Run Text="{Binding IdRoleNavigation.RoleName}" />
+                        <Run Text=")" />
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Border BorderThickness="2"
+                            Margin="0 10 0 10"
+                            x:Name="EmployeePhotoBorder"
+                            HorizontalAlignment="Right"
+                            Width="{Binding ElementName=EmployeePhotoBorder, Path=ActualHeight}"
+                            Height="{Binding ElementName=EmplyeeInformationGrid, Path=Height}"
+                            CornerRadius="66">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#69089e"
+                                              Offset="0.8" />
+                                <GradientStop Color="#FF420265"
+                                              Offset="0" />
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <ImageBrush Stretch="Fill"
+                                        ImageSource="{Binding Photo}" />
+                        </Border.Background>
+                    </Border>
+                </StackPanel>
+
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            x:Name="TitleBarPanel"
+                            VerticalAlignment="Top">
+                    <ui:Button Icon="Circle12"
+                               IconForeground="Green"
+                               Padding="0"
+                               FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                               IconFilled="True"
+                               x:Name="Minim"
+                               Click="Minim_Click"
+                               BorderBrush="Transparent"
+                               Background="Transparent" />
+                    <ui:Button Icon="Circle12"
+                               IconForeground="Red"
+                               Padding="0"
+                               x:Name="CloseButton"
+                               Click="CloseButton_Click"
+                               FontSize="{Binding ElementName=ThisWindow, Path=FontSize}"
+                               IconFilled="True"
+                               BorderBrush="Transparent"
+                               Background="Transparent" />
+                </StackPanel>
+            </Grid>
+
+            <modern:Frame Grid.Row="1"
+                          Margin="10"
+                          x:Name="MainContent">
+            </modern:Frame>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,71 @@
+﻿<Window x:Class="Hetfield.Windows.AddAndChangeWindows.CarStatusesAddAndChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hetfield.Windows.AddAndChangeWindows"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:modern="http://schemas.modernwpf.com/2019"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.png"
+        Height="320"
+        Width="320">
+    <Window.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#69089e"
+                          Offset="1" />
+            <GradientStop Color="#b672db"
+                          Offset="0.4" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="11*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top">
+            <ui:Button Icon="Circle12"
+                       IconForeground="Red"
+                       Padding="0"
+                       x:Name="CloseButton"
+                       Click="CloseButton_Click"
+                       FontSize="20"
+                       IconFilled="True"
+                       BorderBrush="Transparent"
+                       Background="Transparent" />
+        </StackPanel>
+
+        <modern:SimpleStackPanel Margin="40 0"
+                    Grid.Row="1"
+                                 Spacing="20"
+                    x:Name="MainPanel"
+                    VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Center"
+                        Margin="0 0 0 10">
+                <Image Source="/Resources/Logo.png"
+                       Width="160" />
+            </StackPanel>
+            <ui:TextBox PlaceholderText="Введите статус автомобиля"
+                        FontSize="16"
+                        MaxLength="20"
+                        x:Name="CarStatusNameTextBox"
+                        SelectionBrush="#b672db"/>
+
+            <ui:Button Content="Сохранить"
+                       HorizontalAlignment="Stretch"
+                       FontSize="16"
+                       x:Name="SaveButton"
+                       Click="SaveButton_Click"
+                       BorderBrush="White"
+                       BorderThickness="0.3"/>
+        </modern:SimpleStackPanel>
+    </Grid>
+</Window>
